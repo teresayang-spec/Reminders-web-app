@@ -79,7 +79,11 @@ export default function App() {
   return <main className="min-h-screen px-5 py-6 sm:px-8 sm:py-9 lg:px-12">
     <div className="mx-auto max-w-4xl">
       <header className="mb-14 flex items-center justify-between animate-rise">
-        <div className="flex items-center gap-2.5"><div className="grid h-9 w-9 place-items-center rounded-xl bg-[#1c1b1a] text-white"><Bell size={17} strokeWidth={2.3}/></div><span className="text-lg font-semibold tracking-[-.03em]">remindly</span></div>
+        <div className="flex items-center gap-2.5">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-[#1c1b1a] text-white">
+            <Bell size={17} strokeWidth={2.3}/>
+          </div>
+          <span className="text-lg font-semibold tracking-[-.03em]">Teresayang's Reminders</span></div>
         <button onClick={() => setIsOpen(true)} className="hidden items-center gap-2 rounded-xl bg-[#1c1b1a] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#343231] sm:flex"><Plus size={16}/> New reminder</button>
       </header>
 
@@ -87,7 +91,7 @@ export default function App() {
         <p className="mb-3 font-mono text-xs text-[#77736e]">{zoneTime(timezone)} · {formatZone(timezone)}</p>
         <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <h1 className="text-4xl font-semibold tracking-[-.055em] sm:text-5xl">Your reminders</h1>
+            <h1 className="text-4xl font-semibold tracking-[-.055em] sm:text-5xl">Teresa's reminders</h1>
             <p className="mt-2 text-[15px] text-[#77736e]">A calm place for the things you don’t want to forget.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">{notificationPermission !== 'granted' && <button onClick={enableNotifications} className="flex items-center gap-2 rounded-xl border border-[#e5e1dc] bg-white px-3 py-2 text-sm text-[#4c4945] shadow-[0_1px_2px_rgba(28,27,26,.03)] hover:bg-[#f8f6f3]"><BellRing size={15}/> Enable alerts</button>}<label className="relative flex items-center gap-2 rounded-xl border border-[#e5e1dc] bg-white px-3 py-2 text-sm text-[#4c4945] shadow-[0_1px_2px_rgba(28,27,26,.03)]"><Globe2 size={15}/><select value={timezone} onChange={e => setTimezone(e.target.value)} className="appearance-none bg-transparent pr-5 outline-none">{zones.map(zone => <option key={zone}>{zone}</option>)}</select><ChevronDown size={14} className="pointer-events-none absolute right-3"/></label></div>
@@ -139,37 +143,37 @@ export default function App() {
       </button>
       
       {isOpen && 
-      <div className="fixed inset-0 z-20 grid place-items-center bg-[#1c1b1a]/25 p-4 backdrop-blur-[2px] sm:p-5">
+      <div className="fixed inset-0 z-20 grid place-items-end bg-[#1c1b1a]/25 p-3 backdrop-blur-[2px] sm:place-items-center sm:p-5">
       <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl animate-rise sm:p-6">
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-semibold tracking-[-.04em]">New reminder</h2>
             <p className="mt-1 text-sm text-[#77736e]">It will be saved locally.</p>
-            </div>
+          </div>
             <button onClick={() => setIsOpen(false)} className="grid h-8 w-8 place-items-center rounded-lg text-[#77736e] hover:bg-[#f3f1ef]">
               <X size={18}/>
-              </button>
-              </div>
+            </button>
+        </div>
         <form onSubmit={addReminder} className="space-y-4">
-        <label className="block text-sm font-medium">What do you need to remember?
+          <label className="block text-sm font-medium">What do you need to remember?
           <input autoFocus required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="e.g. Send the proposal" className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] px-3.5 py-3 text-[15px] outline-none placeholder:text-[#aaa49e] focus:border-[#89837c]"/></label>
           <label className="block text-sm font-medium">Note 
           <span className="font-normal text-[#9b9690]">(optional)</span>
           <input value={form.note} onChange={e => setForm({ ...form, note: e.target.value })} placeholder="Add a little context" className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] px-3.5 py-3 text-[15px] outline-none placeholder:text-[#aaa49e] focus:border-[#89837c]"/></label>
           <div className="grid grid-cols-2 gap-3">
-          <label className="block text-sm font-medium">Date
-          <input required type="date" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] px-3 py-3 text-sm outline-none focus:border-[#89837c]"/></label>
-          <label className="block text-sm font-medium">Time
+            <label className="block text-sm font-medium">Date
+            <input required type="date" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] px-3 py-3 text-sm outline-none focus:border-[#89837c]"/></label>
+            <label className="block text-sm font-medium">Time
             <input required type="time" value={form.time} onChange={e => setForm({ ...form, time: e.target.value })} className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] px-3 py-3 text-sm outline-none focus:border-[#89837c]"/></label>
-            </div>
+          </div>
           <label className="block text-sm font-medium">Time zone
-          <select value={form.timezone} onChange={e => setForm({ ...form, timezone: e.target.value })} className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] bg-white px-3.5 py-3 text-sm outline-none focus:border-[#89837c]">{zones.map(zone => <option key={zone} value={zone}>{formatZone(zone)}</option>)}
-          </select>
+            <select value={form.timezone} onChange={e => setForm({ ...form, timezone: e.target.value })} className="mt-1.5 w-full rounded-xl border border-[#e5e1dc] bg-white px-3.5 py-3 text-sm outline-none focus:border-[#89837c]">{zones.map(zone => <option key={zone} value={zone}>{formatZone(zone)}</option>)}
+            </select>
           </label>
           <button className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1c1b1a] px-4 py-3 text-sm font-medium text-white transition hover:bg-[#343231]">
             <Plus size={16}/> 
-            Add reminder
-            </button>
+              Add reminder
+          </button>
         </form>
         </div>
         </div>}
